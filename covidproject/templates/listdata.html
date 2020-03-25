@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>COVID-19</title>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <style>
+        body {
+          font-family: Arial;
+        }
+        
+        * {
+          box-sizing: border-box;
+        }
+        .messages {
+            background-color: yellow;
+            }
+
+        
+        form.example input[type=text] {
+          padding: 10px;
+          font-size: 17px;
+          border: 1px solid grey;
+          float: left;
+          width: 80%;
+          background: #f1f1f1;
+        }
+        
+        form.example button {
+          float: left;
+          width: 20%;
+          padding: 10px;
+          background: #2196F3;
+          color: white;
+          font-size: 17px;
+          border: 1px solid grey;
+          border-left: none;
+          cursor: pointer;
+        }
+        
+        form.example button:hover {
+          background: #0b7dda;
+        }
+        
+        form.example::after {
+          content: "";
+          clear: both;
+          display: table;
+        }
+
+        ul {
+          list-style-type: none;
+          margin: 0;
+          padding: 0;
+          overflow: hidden;
+          background-color: #333;
+          }
+
+          li {
+            float: left;
+          }
+
+          li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+          }
+
+          li a:hover {
+            background-color: #111;
+          
+      </style>
+</head>
+<body>
+    <div class="container">
+        <ul>
+          <li><a class="active" href="#home">Home</a></li>
+          <li><a href="/listd/">News</a></li>
+          <li><a href="#contact">Contact</a></li>
+          <li><a href="#about">About</a></li>
+        </ul><br><br>
+        <!-- The form -->
+        {% if messages %}
+              <ul class="messages">
+                  {% for message in messages %}
+                  <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                  {% endfor %}
+              </ul>
+        {% endif %}
+        <br><br>
+
+        <form class="example" action="">
+          <input type="text" placeholder="Search Country.." name="q">
+          <button type="submit"><i class="fa fa-search"></i></button>
+        </form><br>
+
+            <h2>COVID-19 Data</h2>
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th>Country</th>
+                      <th>Confirmed</th>
+                      <th>active</th>
+                      <th>deaths</th>
+                      <th>recovered</th>
+                      <th>last_update</th>
+                   </tr>
+                </thead>
+              {% if data %}
+                {% for d in data %}                                
+                    <tbody>                    
+                        <tr>
+                        <td>{{d.country}}</td>                      
+                        <td>{{d.confirmed}}</td>                      
+                        <td>{{d.active}}</td>                      
+                        <td>{{d.deaths}}</td>                      
+                        <td>{{d.recovered}}</td>                      
+                        <td>{{d.last_update}}</td>
+                        </tr>                    
+                  </tbody>
+                {% endfor %}
+              {% endif %}              
+              {% if sdata %}                           
+                  <tbody>                    
+                      <tr>
+                      <td>{{sdata.country}}</td>                      
+                      <td>{{sdata.confirmed}}</td>                      
+                      <td>{{sdata.active}}</td>                      
+                      <td>{{sdata.deaths}}</td>                      
+                      <td>{{sdata.recovered}}</td>                      
+                      <td>{{sdata.last_update}}</td>
+                      </tr>                    
+                  </tbody>
+                {% endif %}
+                </table>
+              </div>
+              <div class="container" align="center">
+                <button type="button" class="btn btn-success"><a href="/listd/">Back</a></button>
+              </div>    
+    
+  </body>
+  </html>
